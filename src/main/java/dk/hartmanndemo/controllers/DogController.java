@@ -14,6 +14,7 @@ import java.util.List;
 public class DogController {
 
     private static List<DogDTO> dogs = new ArrayList(Arrays.asList(
+            null,
             new DogDTO(1, "Fido", "Labrador", 'M', 4),
             new DogDTO(2, "Benjamin", "Danish Swedish Farm Dog", 'M', 2),
             new DogDTO(3, "Hannah", "Danish Swedish Farm Dog", 'F', 7)

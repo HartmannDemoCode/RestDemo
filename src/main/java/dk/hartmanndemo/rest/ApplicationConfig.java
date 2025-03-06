@@ -33,6 +33,7 @@ public class ApplicationConfig {
             config.http.defaultContentType = "application/json";
             config.router.contextPath = "/api";
             config.bundledPlugins.enableRouteOverview("/routes");
+            config.bundledPlugins.enableDevLogging();
         });
         return applicationConfig;
     }
