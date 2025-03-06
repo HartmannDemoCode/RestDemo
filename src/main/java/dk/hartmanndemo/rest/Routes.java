@@ -26,7 +26,8 @@ public class Routes {
             path("dog", () -> {
                 get("/", (ctx) -> {
                     logger.info("Dette er noget info om hvilken ressource brugeren har tilgået: "+ctx.path());
-                    ctx.json(dogController.getAll());
+                    throw new Exception("Noget gik helt galt");
+//                    ctx.json(dogController.getAll());
                 });
                 get("/{id}", (ctx) -> {
                     try {
