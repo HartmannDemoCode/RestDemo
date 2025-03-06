@@ -1,5 +1,7 @@
 package dk.hartmanndemo.rest;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import io.javalin.Javalin;
 import io.javalin.apibuilder.EndpointGroup;
 import io.javalin.config.JavalinConfig;
@@ -15,6 +17,7 @@ public class ApplicationConfig {
     private static ApplicationConfig applicationConfig;
     private static Javalin app;
     private static JavalinConfig javalinConfig;
+    private ObjectMapper objectMapper = new ObjectMapper();
     private ApplicationConfig(){}
 
     public static ApplicationConfig getInstance(){
@@ -41,6 +44,16 @@ public class ApplicationConfig {
     }
     public ApplicationConfig startServer(int port){
         app.start(port);
+        return applicationConfig;
+    }
+
+    public ApplicationConfig handleException(){
+        app.exception(Exception.class, (e,ctx)->{
+            ObjectNode node = objectMapper.createObjectNode();
+            node.put("msg",e.getMessage());
+            ctx.status(500);
+            ctx.json(node);
+        });
         return applicationConfig;
     }
 }

@@ -15,6 +15,7 @@ public class Main {
                 .getInstance()
                 .initiateServer()
                 .setRoute(Routes.getRoutes())
+                .handleException()
                 .startServer(7070);
     }
 }

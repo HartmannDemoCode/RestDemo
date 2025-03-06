@@ -38,6 +38,7 @@ public class DogController {
         return dog;
     }
 
+
     public DogDTO create(DogDTO dog){
         int id = dogs.size() + 1;
         dog.setId(id);
