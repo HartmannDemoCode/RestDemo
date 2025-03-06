@@ -4,6 +4,8 @@ import dk.hartmanndemo.controllers.DogController;
 import dk.hartmanndemo.dtos.DogDTO;
 import dk.hartmanndemo.dtos.ErrorMessage;
 import io.javalin.apibuilder.EndpointGroup;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import static io.javalin.apibuilder.ApiBuilder.*;
 
@@ -16,12 +18,16 @@ public class Routes {
 
     private static DogController dogController = new DogController();
 
+    private static Logger logger = LoggerFactory.getLogger(Routes.class);
+
     public static EndpointGroup getRoutes() {
         return () ->
         {
             path("dog", () -> {
-                get("/", (ctx) -> ctx.json(dogController.getAll()));
-//                           get("/demo", (ctx)->ctx.result("This is the demo endpoint"));
+                get("/", (ctx) -> {
+                    logger.info("Dette er noget info om hvilken ressource brugeren har tilgået: "+ctx.path());
+                    ctx.json(dogController.getAll());
+                });
                 get("/{id}", (ctx) -> {
                     try {
                         DogDTO dog = dogController.getById(Integer.parseInt(ctx.pathParam("id")));
