@@ -16,24 +16,24 @@ public class Routes {
 
     private static DogController dogController = new DogController();
 
-    public static EndpointGroup getRoutes(){
-        return ()->
+    public static EndpointGroup getRoutes() {
+        return () ->
         {
-            path("dog", ()->{
-                get("/", (ctx)->ctx.json(dogController.getAll()));
+            path("dog", () -> {
+                get("/", (ctx) -> ctx.json(dogController.getAll()));
 //                           get("/demo", (ctx)->ctx.result("This is the demo endpoint"));
-                get("/{id}", (ctx)-> {
+                get("/{id}", (ctx) -> {
                     try {
                         DogDTO dog = dogController.getById(Integer.parseInt(ctx.pathParam("id")));
                         ctx.json(dog);
 
-                    } catch (Exception ex){
+                    } catch (Exception ex) {
                         ErrorMessage error = new ErrorMessage("No dog with that id");
                         ctx.status(404).json(error);
                     }
 
                 });
-                post("/", (ctx)->{
+                post("/", (ctx) -> {
                     DogDTO incomingDog = ctx.bodyAsClass(DogDTO.class);
                     DogDTO returnedDog = dogController.create(incomingDog);
                     ctx.json(returnedDog);
@@ -50,8 +50,6 @@ public class Routes {
 //                               ctx.json(dogs.get(id-1));
 //                           });
             });
-        });
-
-    }
+        };
     }
 }
