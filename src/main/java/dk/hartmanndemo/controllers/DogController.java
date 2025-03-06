@@ -30,7 +30,7 @@ public class DogController {
     }
 
     public List<DogDTO> getAll(){
-        return dogs;
+        return new ArrayList(dogs);
     }
 
     public DogDTO setDog(int id, DogDTO dog){
